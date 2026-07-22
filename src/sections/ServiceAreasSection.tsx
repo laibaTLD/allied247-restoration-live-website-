@@ -63,7 +63,7 @@ export default function ServiceAreasSection({
   if (!uniqueServiceAreas || uniqueServiceAreas.length === 0) return null;
 
   return (
-    <section id="service-areas" className="relative py-16 sm:py-20 md:py-24 lg:py-32" style={{ backgroundColor: sectionBg }}>
+    <section id="service-areas" className="relative py-6 sm:py-8 md:py-10" style={{ backgroundColor: sectionBg }}>
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
 
         {/* Section Header with Navigation */}

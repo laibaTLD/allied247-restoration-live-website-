@@ -67,12 +67,12 @@ const WhyChooseUsSection: React.FC<WhyChooseUsSectionProps> = ({
   return (
     <section
       id="why-choose-us"
-      className="relative min-h-screen overflow-hidden bg-white"
+      className="relative overflow-hidden bg-white"
     >
-      <div className="relative z-10 min-h-screen">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
+      <div className="relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10">
           {/* Section Header */}
-          <div className="text-center mb-16 lg:mb-20">
+          <div className="text-center mb-10 lg:mb-12">
             <h2
               ref={titleRef}
               className={`text-display-lg sm:text-display-xl md:text-display-xl lg:text-display-xl mb-6 transition-all duration-1000 ${

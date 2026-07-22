@@ -985,7 +985,7 @@ body {
 
 /* Section spacing */
 .section-padding {
-  padding: var(--spacing-3xl) 0;
+  padding: var(--spacing-lg) 0;
 }
 
 /* Gradient backgrounds */

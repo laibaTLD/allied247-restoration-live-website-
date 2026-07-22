@@ -104,7 +104,7 @@ export default function ServicesFAQSection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 sm:py-20 md:py-24 lg:py-32 relative overflow-hidden bg-gray-50"
+      className="py-6 sm:py-8 md:py-10 relative overflow-hidden bg-gray-50"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-5">

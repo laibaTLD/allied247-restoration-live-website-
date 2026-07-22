@@ -44,7 +44,7 @@ export default function ServiceOverlayCardSection({
   const secondImageAspectRatio = isVeryLongText ? "aspect-[3/2]" : isLongText ? "aspect-[4/3]" : "aspect-video";
 
   return (
-    <section className="relative w-full py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#fafafa]">
+    <section className="relative w-full py-6 sm:py-8 md:py-10 overflow-hidden bg-[#fafafa]">
       <div className="absolute inset-0 opacity-[0.03]">
         <div
           className="absolute inset-0"

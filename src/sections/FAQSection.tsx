@@ -38,7 +38,7 @@ export default function FAQSection({
   if (!questions || questions.length === 0) return null;
 
   return (
-    <section id="faq" className="relative py-16 sm:py-20 md:py-24 lg:py-32 bg-white">
+    <section id="faq" className="relative py-6 sm:py-8 md:py-10 bg-white">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
 
         {/* Section Header */}
@@ -68,7 +68,7 @@ export default function FAQSection({
                 style={{ borderBottomColor: `${primaryColor}20` }}
               >
                 <button
-                  className="w-full py-8 text-left flex items-center justify-between group"
+                  className="w-full py-5 text-left flex items-center justify-between group"
                   onClick={() => toggleQuestion(index)}
                 >
                   <h3

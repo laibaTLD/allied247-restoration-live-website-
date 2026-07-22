@@ -62,7 +62,7 @@ const ServiceFeaturesSection: React.FC<ServiceFeaturesSectionProps> = ({
   return (
     <section
       id="service-features"
-      className="relative py-16 sm:py-20 md:py-24 lg:py-32 min-h-screen overflow-hidden bg-white"
+      className="relative py-6 sm:py-8 md:py-10 overflow-hidden bg-white"
     >
       {/* Hero Section with Full-Width Background */}
       <div className="relative p-10 flex items-center justify-center">

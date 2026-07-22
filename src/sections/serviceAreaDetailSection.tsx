@@ -57,7 +57,7 @@ export default function ServiceAreaDetailSection({ theme, row1, row1Image, row2,
   const bodyClass = "text-base md:text-lg text-neutral-600 font-light leading-relaxed";
 
   return (
-    <section className="relative bg-[#fafafa] py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
+    <section className="relative bg-[#fafafa] py-6 sm:py-8 md:py-10 overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]">
         <div
           className="absolute inset-0"

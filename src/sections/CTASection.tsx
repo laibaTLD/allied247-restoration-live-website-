@@ -39,7 +39,7 @@ const CTASection: React.FC<CTASectionProps> = ({ data, theme, images }) => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[600px] py-20 flex items-center justify-center overflow-hidden"
+      className="relative min-h-[400px] py-6 sm:py-8 md:py-10 flex items-center justify-center overflow-hidden"
       style={{ clipPath: 'inset(0)' }}
     >
       {/* 

@@ -49,7 +49,7 @@ const ServiceAreaIntroSection: React.FC<ServiceAreaIntroSectionProps> = ({
   return (
     <section
       id="service-area-intro"
-      className="relative py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden bg-[#fafafa]"
+      className="relative py-6 sm:py-8 md:py-10 overflow-hidden bg-[#fafafa]"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">

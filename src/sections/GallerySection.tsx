@@ -25,7 +25,7 @@ export default function GallerySection({ title, description, images, theme }: Ga
   const colWidth = displayImages.length === 3 ? "w-1/3" : "w-1/2 md:w-1/4";
 
   return (
-    <section id="gallery" className="w-full bg-white overflow-hidden py-16 sm:py-20 md:py-24 lg:py-32">
+    <section id="gallery" className="w-full bg-white overflow-hidden py-6 sm:py-8 md:py-10">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 mb-12 sm:mb-16 md:mb-20 lg:mb-24 text-center">
         <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif font-light leading-tight tracking-tight mb-6" style={{ color: primaryColor }}>
           {title || "Our Gallery"}

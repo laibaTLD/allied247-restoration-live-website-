@@ -25,7 +25,7 @@ const ServiceAreaBulletsSection: React.FC<ServiceAreaBulletsSectionProps> = ({
   const secondaryColor = theme?.secondaryColor || "#6b7280";
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#fafafa]">
+    <section className="py-6 sm:py-8 md:py-10 bg-[#fafafa]">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16">
         <div className="mx-auto max-w-6xl">
           <motion.ul

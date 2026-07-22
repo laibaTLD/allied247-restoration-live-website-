@@ -42,7 +42,7 @@ export default function FooterSection({
   const primaryColor = themeData?.primaryColor || '#3b2b20';
 
   return (
-    <footer className="relative py-12 sm:py-16 md:py-20 lg:py-24 text-white overflow-hidden" style={{ backgroundColor: primaryColor }}>
+    <footer className="relative py-6 sm:py-8 md:py-10 text-white overflow-hidden" style={{ backgroundColor: primaryColor }}>
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">

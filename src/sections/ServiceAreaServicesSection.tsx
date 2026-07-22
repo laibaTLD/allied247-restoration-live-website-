@@ -40,7 +40,7 @@ export default function ServiceAreaServicesSection({
   const mainImageAlt = images[0]?.altText || "Junk removal services";
 
   return (
-    <section id="services" className="relative bg-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <section id="services" className="relative bg-white py-6 sm:py-8 md:py-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title and Description */}
         <div className="text-center max-w-3xl sm:max-w-4xl md:max-w-5xl mx-auto mb-8 sm:mb-12 md:mb-16 lg:mb-20">
