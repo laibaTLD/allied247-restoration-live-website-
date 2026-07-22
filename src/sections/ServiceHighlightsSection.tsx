@@ -2,7 +2,6 @@
 
 import { useScrollAnimation, useStaggeredAnimation } from "@/hooks/useScrollAnimation";
 import { ServiceHighlightsContent } from "@/types/template";
-import { useEffect } from "react";
 
 interface ServiceHighlightsSectionProps {
   data: ServiceHighlightsContent;
@@ -28,17 +27,10 @@ export default function ServiceHighlightsSection({
   const primaryColor = theme?.primaryColor || '#3b2b20';
   const secondaryColor = theme?.secondaryColor || '#6f6258';
 
-  useEffect(() => {
-    console.log('[ServiceHighlightsSection] rendered', {
-      title: data?.title,
-      services: data?.services?.length
-    });
-  }, [data]);
-
   return (
     <section id="service-highlights" className="relative py-6 sm:py-8 md:py-10 overflow-hidden bg-white">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 relative z-10">
-        <div className="flex flex-col lg:flex-row items-end justify-between mb-16 lg:mb-24 gap-8">
+        <div className="flex flex-col lg:flex-row items-end justify-between mb-8 lg:mb-10 gap-8">
           <div className="max-w-3xl">
             <h2
               ref={titleRef}

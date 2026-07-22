@@ -1,24 +1,7 @@
 import type { Metadata } from "next";
-import { Poppins, Open_Sans } from "next/font/google";
 import Script from "next/script";
-import { fetchLandingPageForSSG } from "@/lib/database";
-import { ChatProvider } from "@/components/chat/ChatProvider";
-import ChatWidget from "@/components/chat/ChatWidget";
+import LazyChat from "@/components/chat/LazyChat";
 import "./globals.css";
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const openSans = Open_Sans({
-  variable: "--font-open-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 const fallbackMetadata: Metadata = {
   title: "Get Now Experienced Damage Restoration Services Contractor in Kalispell, MT | Allied 24/7 Restoration",
@@ -31,32 +14,7 @@ const fallbackMetadata: Metadata = {
   },
 };
 
-export async function generateMetadata(): Promise<Metadata> {
-  const templateId = process.env.NEXT_PUBLIC_TEMPLATE_ID;
-  const id = process.env.NEXT_PUBLIC_ID;
-
-  if (!templateId || !id) {
-    return fallbackMetadata;
-  }
-
-  const landingPageData = await fetchLandingPageForSSG(templateId, id);
-
-  const resolvedTitle =
-    landingPageData?.seoData?.title ||
-    landingPageData?.businessName ||
-    fallbackMetadata.title;
-  const resolvedDescription =
-    landingPageData?.seoData?.description || fallbackMetadata.description;
-
-  return {
-    ...fallbackMetadata,
-    title: resolvedTitle,
-    description: resolvedDescription,
-    icons: {
-      icon: '/Favicon.svg',
-    },
-  };
-}
+export const metadata: Metadata = fallbackMetadata;
 
 export default function RootLayout({
   children,
@@ -65,16 +23,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        suppressHydrationWarning
-        className={`${poppins.variable} ${openSans.variable} antialiased`}
-      >
-        <ChatProvider>
-          {children}
-          <ChatWidget />
-        </ChatProvider>
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-Y1QXJN326X" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body suppressHydrationWarning className="antialiased">
+        {children}
+        <LazyChat />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-Y1QXJN326X" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

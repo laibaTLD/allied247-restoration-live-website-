@@ -18,7 +18,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
 // Enable ISR with 60-second revalidation
-export const revalidate = 60;
+export const revalidate = 300;
 
 // Generate static params for all published landing pages
 export async function generateStaticParams() {
@@ -115,16 +115,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const landingPageData = await getLandingPageData();
-  // Debug: server-side log of data coming from the database
-  // This will print in the server console during SSR/SSG
-  console.log('[Home] landingPageData', {
-    id: landingPageData.id,
-    businessName: landingPageData.businessName,
-    hasImages: !!landingPageData.images?.length,
-    themeData: landingPageData.themeData,
-    aboutFeaturesCount: landingPageData.content?.about?.features?.length,
-    serviceHighlightsCount: landingPageData.content?.serviceHighlights?.services?.length,
-  });
 
   return (
     <Layout

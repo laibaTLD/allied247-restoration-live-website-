@@ -8,11 +8,17 @@ const nextConfig = {
         hostname: "**", // allow any host
       },
     ],
-    qualities: [75, 85, 90, 95, 100], // Configure allowed quality values
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    qualities: [70, 75, 85],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
   },
-  // Enable experimental features for better performance
   experimental: {
-    ppr: false, // Keep false for stability
+    ppr: false,
+    optimizePackageImports: ["lucide-react", "react-icons", "framer-motion"],
+    staticGenerationMaxConcurrency: 2,
+    staticGenerationRetryCount: 3,
   },
   async redirects() {
     const services = [
@@ -30,11 +36,9 @@ const nextConfig = {
       permanent: true,
     }));
   },
-  // Configure for optimal SSG + ISR
   async rewrites() {
     return [];
   },
-  // Enable compression and optimization
   compress: true,
   poweredByHeader: false,
 };

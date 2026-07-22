@@ -1,5 +1,6 @@
 
 import ServiceAreaLayout from "@/components/ServiceAreaLayout";
+import { notFound } from "next/navigation";
 import ServiceAreaHeroSection from "@/sections/ServiceAreaHeroSection";
 import ServiceAreaIntroSection from "@/sections/ServiceAreaIntroSection";
 import ServiceAreaDetailSection from "@/sections/serviceAreaDetailSection";
@@ -227,17 +228,13 @@ async function getLandingPageData(): Promise<LandingPageData> {
   const id = process.env.NEXT_PUBLIC_ID;
 
   if (!templateId || !id) {
-    throw new Error(
-      "Missing required environment variables: NEXT_PUBLIC_TEMPLATE_ID, NEXT_PUBLIC_ID"
-    );
+    notFound();
   }
 
   const landingPageData = await fetchLandingPageForSSG(templateId, id);
 
   if (!landingPageData) {
-    throw new Error(
-      `Landing page not found: templateId=${templateId}, id=${id}`
-    );
+    notFound();
   }
 
   return landingPageData;

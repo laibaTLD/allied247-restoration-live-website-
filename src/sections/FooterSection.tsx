@@ -42,7 +42,7 @@ export default function FooterSection({
   const primaryColor = themeData?.primaryColor || '#3b2b20';
 
   return (
-    <footer className="relative py-6 sm:py-8 md:py-10 text-white overflow-hidden" style={{ backgroundColor: primaryColor }}>
+    <footer className="relative py-8 sm:py-10 text-white overflow-hidden" style={{ backgroundColor: primaryColor }}>
       {/* Decorative background element */}
       <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -51,15 +51,16 @@ export default function FooterSection({
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
 
           {/* COLUMN 1: Brand & Intro */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <div className="relative w-40 h-16">
               <Image
                 src="/logo.png"
                 alt={businessName}
                 fill
+                sizes="160px"
                 className="object-contain brightness-0 invert"
               />
             </div>
@@ -71,9 +72,9 @@ export default function FooterSection({
           </div>
 
           {/* COLUMN 2: Quick Links */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <h4 className="text-lg font-serif font-light tracking-wide">Discovery</h4>
-            <nav className="flex flex-col space-y-4">
+            <nav className="flex flex-col space-y-3">
               {[
                 { label: 'Home', href: '/' },
                 { label: 'About', href: '/about' },
@@ -92,9 +93,9 @@ export default function FooterSection({
           </div>
 
           {/* COLUMN 3: Contact Details */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <h4 className="text-lg font-serif font-light tracking-wide">Connect</h4>
-            <div className="space-y-6 text-sm font-sans opacity-60">
+            <div className="space-y-4 text-sm font-sans opacity-60">
               {businessData?.address && (
                 <div className="space-y-1">
                   <span className="block font-bold opacity-40 uppercase text-[10px] tracking-widest">Visit Us</span>
@@ -111,7 +112,7 @@ export default function FooterSection({
           </div>
 
           {/* COLUMN 4: Socials & Hours */}
-          <div className="space-y-8">
+          <div className="space-y-4">
             <h4 className="text-lg font-serif font-light tracking-wide">Social</h4>
             {/* Social Links - Hardcoded Only */}
             <div className="flex gap-4">
@@ -154,7 +155,7 @@ export default function FooterSection({
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] opacity-40 font-bold">
+        <div className="mt-8 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] opacity-40 font-bold">
           <p>2026 ©Allied24/7Restoration. All Rights Reserved. Build by <a href="https://usbrandbooster.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">US Brand Booster</a>.</p>
           <div className="flex gap-8">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>

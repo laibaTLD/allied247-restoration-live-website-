@@ -112,6 +112,8 @@ export default function HeroSection({
                 fill
                 className="object-cover"
                 priority
+                sizes="(max-width: 1024px) 85vw, 45vw"
+                quality={75}
               />
             </motion.div>
           </motion.div>
@@ -129,6 +131,9 @@ export default function HeroSection({
               alt="Accent detail"
               fill
               className="object-cover"
+              sizes="(max-width: 1024px) 45vw, 25vw"
+              quality={70}
+              loading="lazy"
             />
           </motion.div>
 

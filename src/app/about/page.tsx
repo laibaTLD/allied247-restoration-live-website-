@@ -3,13 +3,15 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import CTASection from "@/sections/CTASection";
 import ServiceHighlightsSection from "@/sections/ServiceHighlightsSection";
+import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import CompanyDetails from "@/sections/CompanyDetails";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import Image from "next/image";
 
 // Enable ISR with 60-second revalidation
-export const revalidate = 60;
+export const revalidate = 300;
 
 // Server-side data fetching for SSG
 async function getLandingPageData() {
@@ -115,11 +117,11 @@ export default async function AboutPage() {
       <div className="animate-fade-in-up">
         <main>
           {/* Hero Section for About Page */}
-          <section className="relative py-32 lg:py-40 overflow-hidden" style={{ backgroundColor: landingPageData.themeData?.primaryColor || '#003366' }}>
+          <section className="relative pt-28 pb-12 sm:pt-32 sm:pb-14 md:pt-36 md:pb-16 overflow-hidden" style={{ backgroundColor: landingPageData.themeData?.primaryColor || '#003366' }}>
             <div className="absolute inset-0 bg-black/20"></div>
             <div className="container mx-auto px-6 lg:px-16 relative z-10">
               <div className="max-w-4xl mx-auto text-center text-white">
-                <h1 className="text-5xl lg:text-7xl font-serif font-light mb-8 tracking-wide">
+                <h1 className="text-5xl lg:text-7xl font-serif font-light mb-4 tracking-wide">
                   About <span className="font-bold">Allied 24/7</span>
                 </h1>
                 <p className="text-xl lg:text-2xl font-light leading-relaxed opacity-90 max-w-3xl mx-auto">
@@ -131,11 +133,11 @@ export default async function AboutPage() {
 
           {/* About Content Section */}
           {landingPageData.content.about && (
-            <section className="py-24 lg:py-32 bg-white">
+            <section className="py-6 sm:py-8 md:py-10 bg-white">
               <div className="container mx-auto px-6 lg:px-16">
                 <div className="max-w-6xl mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-                    <div className="space-y-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+                    <div className="space-y-6">
                       <h2 className="text-4xl lg:text-5xl font-serif font-light text-gray-900 leading-tight">
                         {landingPageData.content.about.title || "Our Commitment to Excellence"}
                       </h2>
@@ -158,15 +160,18 @@ export default async function AboutPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="relative">
+                    <div className="relative min-h-[280px] lg:min-h-0 h-full">
                       {landingPageData.images?.find((img) => img.slotName === "about" || img.category === "about") ? (
-                        <img
-                          src={landingPageData.images.find((img) => img.slotName === "about" || img.category === "about")?.imageUrl}
+                        <Image
+                          src={landingPageData.images.find((img) => img.slotName === "about" || img.category === "about")!.imageUrl}
                           alt="About Allied 24/7 Restoration"
-                          className="w-full h-auto rounded-2xl shadow-2xl"
+                          fill
+                          className="object-cover rounded-2xl shadow-2xl"
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          quality={75}
                         />
                       ) : (
-                        <div className="w-full h-96 bg-gray-200 rounded-2xl flex items-center justify-center">
+                        <div className="absolute inset-0 w-full h-full bg-gray-200 rounded-2xl flex items-center justify-center">
                           <span className="text-gray-500 text-lg">About Image</span>
                         </div>
                       )}
@@ -202,6 +207,15 @@ export default async function AboutPage() {
               images={landingPageData.images}
             />
           )}
+
+          {/* Serving Areas Section */}
+          {landingPageData.businessData?.serviceAreas &&
+            landingPageData.businessData.serviceAreas.length > 0 && (
+              <ServiceAreasSection
+                serviceAreas={landingPageData.businessData.serviceAreas}
+                themeData={landingPageData.themeData}
+              />
+            )}
 
           {/* Footer */}
           <FooterSection

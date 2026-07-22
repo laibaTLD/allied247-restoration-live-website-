@@ -66,7 +66,7 @@ export default function BusinessOverviewSection({
         {/* Section Heading */}
         <div
           ref={headerRef}
-          className={`mb-16 lg:mb-24 transition-all duration-1000 transform ${headerVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+          className={`mb-8 lg:mb-10 transition-all duration-1000 transform ${headerVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
             }`}
         >
           <h2 className="text-5xl md:text-7xl font-serif font-light leading-tight tracking-tight" style={{ color: primaryColor }}>

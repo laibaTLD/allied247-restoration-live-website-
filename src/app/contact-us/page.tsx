@@ -74,7 +74,7 @@ export default async function ContactPage() {
         phoneNumber={landingPageData.businessData?.phone}
         serviceAreas={landingPageData.businessData?.serviceAreas}
       />
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-white pt-28 sm:pt-32 md:pt-36">
         <BusinessOverviewSection
           contact={contactContent}
           businessData={mockBusinessData}

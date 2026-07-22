@@ -45,7 +45,7 @@ const CompanyDetails: React.FC<CompanyDetailsProps> = ({ data, images, theme }) 
         {/* Section Header */}
         <div
           ref={headerRef}
-          className={`max-w-3xl mx-auto text-center mb-20 space-y-8 transition-all duration-1000 transform ${headerVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+          className={`max-w-3xl mx-auto text-center mb-8 lg:mb-10 space-y-4 transition-all duration-1000 transform ${headerVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
             }`}
         >
           <div className="space-y-4">

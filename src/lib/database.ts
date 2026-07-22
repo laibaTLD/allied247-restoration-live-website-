@@ -1,18 +1,54 @@
-import { Pool } from "pg";
+import { Pool, PoolClient } from "pg";
+import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { LandingPageData, Image } from "@/types/template";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  max: 3,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 20000,
+  keepAlive: true,
 });
 
-export async function query(text: string, params?: unknown[]) {
-  const client = await pool.connect();
-  try {
-    const result = await client.query(text, params);
-    return result.rows;
-  } finally {
-    client.release();
+/** Serialize DB access during build so we don't overwhelm the remote DB. */
+let queue: Promise<unknown> = Promise.resolve();
+function enqueue<T>(fn: () => Promise<T>): Promise<T> {
+  const run = queue.then(fn, fn);
+  queue = run.then(
+    () => undefined,
+    () => undefined
+  );
+  return run;
+}
+
+async function withRetry<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
+  let lastError: unknown;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      const delay = 500 * Math.pow(2, i);
+      await new Promise((r) => setTimeout(r, delay));
+    }
   }
+  throw lastError;
+}
+
+export async function query(text: string, params?: unknown[]) {
+  return enqueue(() =>
+    withRetry(async () => {
+      let client: PoolClient | undefined;
+      try {
+        client = await pool.connect();
+        const result = await client.query(text, params);
+        return result.rows;
+      } finally {
+        client?.release();
+      }
+    })
+  );
 }
 
 export async function fetchLandingPageData(templateId: string, id: string): Promise<LandingPageData | null> {
@@ -24,9 +60,7 @@ export async function fetchLandingPageData(templateId: string, id: string): Prom
     
     if (rows.length === 0) return null;
     
-    const result = rows[0] as LandingPageData;
-    
-    return result;
+    return rows[0] as LandingPageData;
   } catch (error) {
     console.error('Error fetching landing page data:', error);
     return null;
@@ -51,10 +85,8 @@ export async function fetchLandingPageWithImages(templateId: string, id: string)
   return { ...landingPage, images };
 }
 
-// Optimized function for SSG build-time data fetching
-export async function fetchLandingPageForSSG(templateId: string, id: string): Promise<LandingPageData | null> {
+async function fetchLandingPageForSSGUncached(templateId: string, id: string): Promise<LandingPageData | null> {
   try {
-    // Single optimized query to fetch landing page with images
     const rows = await query(`
       SELECT 
         lp.*,
@@ -81,16 +113,22 @@ export async function fetchLandingPageForSSG(templateId: string, id: string): Pr
     
     if (rows.length === 0) return null;
     
-    const result = rows[0] as LandingPageData & { images: Image[] };
-    
-    return result;
+    return rows[0] as LandingPageData & { images: Image[] };
   } catch (error) {
     console.error('Error fetching landing page data for SSG:', error);
     return null;
   }
 }
 
-// Function to get all available landing pages for static generation
+/** Deduped per-request + cached across requests (60s). */
+export const fetchLandingPageForSSG = cache(async (templateId: string, id: string): Promise<LandingPageData | null> => {
+  return unstable_cache(
+    () => fetchLandingPageForSSGUncached(templateId, id),
+    ["landing-page", templateId, id],
+    { revalidate: 300, tags: [`landing-${id}`] }
+  )();
+});
+
 export async function getAllLandingPageIds(): Promise<Array<{ templateId: string; id: string }>> {
   try {
     const rows = await query(`
@@ -107,52 +145,5 @@ export async function getAllLandingPageIds(): Promise<Array<{ templateId: string
   } catch (error) {
     console.error('Error fetching landing page IDs:', error);
     return [];
-  }
-}
-
-export async function debugDatabaseContent() {
-  try {
-    console.log('🔍 Checking database connection...');
-    
-    // Test basic connection
-    const testQuery = await query('SELECT NOW() as current_time');
-    console.log('✅ Database connected successfully at:', testQuery[0]?.current_time);
-    
-    // Check if LandingPage table exists
-    const tableCheck = await query(`
-      SELECT table_name 
-      FROM information_schema.tables 
-      WHERE table_schema = 'public' AND table_name = 'LandingPage'
-    `);
-    
-    if (tableCheck.length === 0) {
-      console.log('❌ LandingPage table does not exist');
-      return;
-    }
-    
-    console.log('✅ LandingPage table exists');
-    
-    // Check all landing pages
-    const allPages = await query('SELECT id, "templateId", "businessName" FROM "LandingPage"');
-    console.log(`📊 Found ${allPages.length} landing pages in database:`);
-    
-    allPages.forEach((page: { id: string; templateId: string; businessName: string }) => {
-      console.log(`  - ID: ${page.id}, Template: ${page.templateId}, Business: ${page.businessName}`);
-    });
-    
-    // Check for specific template
-    const specificPage = await query(`
-      SELECT * FROM "LandingPage" 
-      WHERE "templateId" = $1 AND id = $2
-    `, ['premium-corporate-template', 'c0f6f1c7-82d2-4410-92ab-26d6071d5c3c']);
-    
-    if (specificPage.length > 0) {
-      console.log('✅ Found the requested landing page:', specificPage[0].businessName);
-    } else {
-      console.log('❌ Could not find landing page with templateId: premium-corporate-template and id: c0f6f1c7-82d2-4410-92ab-26d6071d5c3c');
-    }
-    
-  } catch (error) {
-    console.error('❌ Database debug failed:', error);
   }
 }
