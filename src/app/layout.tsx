@@ -31,19 +31,24 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap"
           rel="stylesheet"
         />
-      </head>
-      <body suppressHydrationWarning className="antialiased">
-        {children}
-        <LazyChat />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-Y1QXJN326X" strategy="lazyOnload" />
-        <Script id="google-analytics" strategy="lazyOnload">
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17907036311"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+            gtag('config', 'AW-17907036311');
             gtag('config', 'G-Y1QXJN326X');
           `}
         </Script>
+      </head>
+      <body suppressHydrationWarning className="antialiased">
+        {children}
+        <LazyChat />
       </body>
     </html>
   );
