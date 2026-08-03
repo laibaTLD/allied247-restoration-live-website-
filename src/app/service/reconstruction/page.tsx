@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
-import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
-import ServicePageBanner from "@/sections/ServicePageBanner";
-import ServicePageDetail from "@/sections/ServicePageDetail";
+import ServiceDetailLayout from "@/sections/ServiceDetailLayout";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
@@ -82,51 +80,6 @@ export default async function ReconstructionPage() {
     }
   ];
 
-  const detailBlocks = [
-    {
-      heading: "Reconstruction Services",
-      description:
-        "Complete structural repairs and rebuilding after fire, water, storm, or other disaster damage — done right the first time.",
-      bullets: [
-        "Structural repairs & framing",
-        "Drywall installation & finishing",
-        "Flooring restoration",
-        "Roofing & exterior repairs",
-        "Plumbing & electrical",
-        "HVAC system restoration",
-      ],
-      imageSrc: "/images/image-8.jpg",
-      imageAlt: "Property reconstruction and structural repairs",
-    },
-    {
-      heading: "Remodeling & Improvements",
-      description:
-        "Beyond repairs — rebuild with upgrades that improve comfort, value, and long-term durability.",
-      bullets: [
-        "Kitchen reconstruction",
-        "Bathroom restoration",
-        "Basement finishing",
-        "Room additions",
-        "Exterior renovations",
-        "Custom carpentry",
-      ],
-      imageSrc: "/images/image-50.webp",
-      imageAlt: "Home remodeling and reconstruction project",
-    },
-    {
-      heading: "Why Choose Our Reconstruction Services?",
-      description:
-        "Licensed trades, premium materials, and full project management from permits through final inspection.",
-      bullets: [
-        "Licensed builders, electricians, and plumbers for code-compliant work",
-        "Premium materials and modern building techniques",
-        "Complete oversight from permits to final inspection",
-      ],
-      imageSrc: "/images/image-52.jpg",
-      imageAlt: "Allied Restoration reconstruction crew",
-    },
-  ];
-
   return (
     <Layout
       title={landingPageData.seoData.title}
@@ -147,18 +100,52 @@ export default async function ReconstructionPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <ServicePageBanner
-            title="Property Reconstruction Services"
-            description="Rebuild and restore your property after fire, water, storm, or other disaster damage — complete structural repairs, remodeling, and rebuilding across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
-            imageSrc="/images/image-7.jpg"
-            imageAlt="Property reconstruction services"
+          <ServiceDetailLayout
+            title="Allied 24/7 Restoration — Your Trusted Partner in Property Reconstruction"
+            intro="Our professional reconstruction services help rebuild and restore your property after damage from fire, water, storms, or other disasters. We provide complete structural repairs, remodeling, and rebuilding services for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
             breadcrumbLabel="Reconstruction"
+            heroImage="/images/image-7.jpg"
+            heroAlt="Property reconstruction services"
+            defaultService="Property Reconstruction"
             theme={landingPageData.themeData}
-          />
-
-          <ServicePageDetail
-            theme={landingPageData.themeData}
-            blocks={detailBlocks}
+            sections={[
+              {
+                heading: "Why Choose Allied 24/7 for Reconstruction?",
+                description:
+                  "Licensed trades, premium materials, and full project management from permits through final inspection.",
+                bullets: [
+                  "Licensed Contractors: Licensed builders, electricians, and plumbers for code-compliant work",
+                  "Quality Materials: Premium materials and modern building techniques for lasting results",
+                  "Project Management: Complete oversight from permits to final inspection",
+                ],
+              },
+              {
+                heading: "Reconstruction Services",
+                description:
+                  "Complete structural repairs and rebuilding after fire, water, storm, or other disaster damage.",
+                bullets: [
+                  "Structural repairs & framing",
+                  "Drywall installation & finishing",
+                  "Flooring restoration",
+                  "Roofing & exterior repairs",
+                  "Plumbing & electrical",
+                  "HVAC system restoration",
+                ],
+              },
+              {
+                heading: "Remodeling & Improvements",
+                description:
+                  "Beyond repairs — rebuild with upgrades that improve comfort, value, and long-term durability.",
+                bullets: [
+                  "Kitchen reconstruction",
+                  "Bathroom restoration",
+                  "Basement finishing",
+                  "Room additions",
+                  "Exterior renovations",
+                  "Custom carpentry",
+                ],
+              },
+            ]}
           />
 
           <ServiceAreasSection
@@ -174,19 +161,6 @@ export default async function ReconstructionPage() {
               theme={landingPageData.themeData}
             />
           )}
-
-          <BusinessOverviewSection
-            content={landingPageData.content.businessOverview?.content}
-            contact={
-              landingPageData.content.contact || {
-                title: "Contact Us",
-                description: "Get in touch with us today",
-                showMap: true,
-              }
-            }
-            businessData={landingPageData.businessData}
-            theme={landingPageData.themeData}
-          />
 
           <FooterSection
             businessName={landingPageData.businessName}

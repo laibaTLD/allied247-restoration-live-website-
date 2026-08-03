@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
-import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
-import ServicePageBanner from "@/sections/ServicePageBanner";
-import ServicePageDetail from "@/sections/ServicePageDetail";
+import ServiceDetailLayout from "@/sections/ServiceDetailLayout";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
@@ -82,51 +80,6 @@ export default async function WaterRestorationPage() {
     }
   ];
 
-  const detailBlocks = [
-    {
-      heading: "Our Water Restoration Process",
-      description:
-        "Fast, reliable recovery from floods, leaks, and water-related disasters — from emergency extraction through final repairs.",
-      bullets: [
-        "Emergency contact & inspection",
-        "Water extraction & removal",
-        "Drying & dehumidification",
-        "Cleaning & sanitizing",
-        "Structural repairs",
-        "Content restoration",
-      ],
-      imageSrc: "/images/image-36.jpg",
-      imageAlt: "Water damage extraction and drying equipment",
-    },
-    {
-      heading: "Common Water Damage Causes",
-      description:
-        "We handle every type of water emergency so secondary damage and mold never get a chance to take hold.",
-      bullets: [
-        "Burst or leaking pipes",
-        "Flooding from storms",
-        "Appliance malfunctions",
-        "Roof leaks",
-        "Sewage backups",
-        "Foundation seepage",
-      ],
-      imageSrc: "/images/image-38.jpg",
-      imageAlt: "Flood and water damage restoration in progress",
-    },
-    {
-      heading: "Why Choose Our Water Restoration?",
-      description:
-        "Industrial-grade equipment and round-the-clock response mean your property is dried thoroughly and restored completely.",
-      bullets: [
-        "24/7 emergency response to prevent further damage and mold growth",
-        "Industrial-grade pumps, dehumidifiers, and air movers for fast drying",
-        "Complete restoration from extraction to final repairs",
-      ],
-      imageSrc: "/images/image-39.jpg",
-      imageAlt: "Professional water damage restoration team",
-    },
-  ];
-
   return (
     <Layout
       title={landingPageData.seoData.title}
@@ -147,18 +100,52 @@ export default async function WaterRestorationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <ServicePageBanner
-            title="Water Damage Restoration Services"
-            description="24/7 emergency response, water extraction, structural drying, and complete restoration for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
-            imageSrc="/images/image-41.webp"
-            imageAlt="Water damage restoration services"
+          <ServiceDetailLayout
+            title="Allied 24/7 Restoration — Your Trusted Partner in Water Damage Restoration"
+            intro="Our professional water damage restoration services provide fast, reliable recovery from floods, leaks, and water-related disasters. We offer 24/7 emergency response, water extraction, structural drying, and complete restoration for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
             breadcrumbLabel="Water Restoration"
+            heroImage="/images/image-41.webp"
+            heroAlt="Water damage restoration services"
+            defaultService="Water Damage Restoration"
             theme={landingPageData.themeData}
-          />
-
-          <ServicePageDetail
-            theme={landingPageData.themeData}
-            blocks={detailBlocks}
+            sections={[
+              {
+                heading: "Why Choose Allied 24/7 for Water Restoration?",
+                description:
+                  "Industrial-grade equipment and round-the-clock response mean your property is dried thoroughly and restored completely.",
+                bullets: [
+                  "24/7 Emergency Response: Immediate response to prevent further damage and mold growth",
+                  "Advanced Equipment: Industrial-grade pumps, dehumidifiers, and air movers for fast drying",
+                  "Complete Restoration: From water extraction to final repairs, we handle the entire process",
+                ],
+              },
+              {
+                heading: "Our Water Restoration Process",
+                description:
+                  "A proven step-by-step approach to stop damage, dry your property, and restore it safely.",
+                bullets: [
+                  "Emergency contact & inspection",
+                  "Water extraction & removal",
+                  "Drying & dehumidification",
+                  "Cleaning & sanitizing",
+                  "Structural repairs",
+                  "Content restoration",
+                ],
+              },
+              {
+                heading: "Common Water Damage Causes",
+                description:
+                  "We handle every type of water emergency so secondary damage never gets a chance to take hold.",
+                bullets: [
+                  "Burst or leaking pipes",
+                  "Flooding from storms",
+                  "Appliance malfunctions",
+                  "Roof leaks",
+                  "Sewage backups",
+                  "Foundation seepage",
+                ],
+              },
+            ]}
           />
 
           <ServiceAreasSection
@@ -174,19 +161,6 @@ export default async function WaterRestorationPage() {
               theme={landingPageData.themeData}
             />
           )}
-
-          <BusinessOverviewSection
-            content={landingPageData.content.businessOverview?.content}
-            contact={
-              landingPageData.content.contact || {
-                title: "Contact Us",
-                description: "Get in touch with us today",
-                showMap: true,
-              }
-            }
-            businessData={landingPageData.businessData}
-            theme={landingPageData.themeData}
-          />
 
           <FooterSection
             businessName={landingPageData.businessName}

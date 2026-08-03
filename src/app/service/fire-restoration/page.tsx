@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
-import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
-import ServicePageBanner from "@/sections/ServicePageBanner";
-import ServicePageDetail from "@/sections/ServicePageDetail";
+import ServiceDetailLayout from "@/sections/ServiceDetailLayout";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
@@ -82,43 +80,6 @@ export default async function FireRestorationPage() {
     }
   ];
 
-  const detailBlocks = [
-    {
-      heading: "Our Fire Restoration Services",
-      description:
-        "From emergency board-up to final reconstruction, our certified team handles every stage of fire and smoke recovery for homes and businesses across Montana.",
-      bullets: [
-        "Emergency board-up & securing",
-        "Fire damage assessment",
-        "Smoke & soot removal",
-        "Structural cleaning & deodorization",
-        "Content cleaning & restoration",
-        "Reconstruction & repairs",
-      ],
-      imageSrc: "/images/image-23.jpg",
-      imageAlt: "Fire damage restoration and smoke cleanup crew at work",
-    },
-    {
-      heading: "Why Choose Our Fire Restoration?",
-      description:
-        "We respond around the clock with IICRC-certified specialists and manage the full recovery process so you can focus on getting back to normal.",
-      bullets: [
-        "24/7 emergency response to secure your property and stop further damage",
-        "IICRC certified fire restoration specialists trained in smoke and soot remediation",
-        "Complete recovery from board-up through final reconstruction",
-      ],
-      imageSrc: "/images/image-25.png",
-      imageAlt: "Professional fire restoration equipment and cleanup",
-    },
-    {
-      heading: "Serving Flathead County",
-      description:
-        "Trusted fire and smoke damage restoration for Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside — with local crews ready when disaster strikes.",
-      imageSrc: "/images/image-26.jpg",
-      imageAlt: "Allied Restoration fire damage restoration team",
-    },
-  ];
-
   return (
     <Layout
       title={landingPageData.seoData.title}
@@ -139,18 +100,39 @@ export default async function FireRestorationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <ServicePageBanner
-            title="Fire & Smoke Damage Restoration Services"
-            description="Professional fire cleanup, smoke remediation, soot removal, and complete property restoration for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
-            imageSrc="/images/image-21.jpg"
-            imageAlt="Fire and smoke damage restoration services"
+          <ServiceDetailLayout
+            title="Allied 24/7 Restoration — Your Trusted Partner in Fire & Smoke Damage Recovery"
+            intro="Our professional fire damage restoration services help you recover quickly from devastating fire and smoke damage. We provide comprehensive fire cleanup, smoke remediation, soot removal, and complete property restoration for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
             breadcrumbLabel="Fire Restoration"
+            heroImage="/images/image-21.jpg"
+            heroAlt="Fire and smoke damage restoration services"
+            defaultService="Fire & Smoke Restoration"
             theme={landingPageData.themeData}
-          />
-
-          <ServicePageDetail
-            theme={landingPageData.themeData}
-            blocks={detailBlocks}
+            sections={[
+              {
+                heading: "Why Choose Allied 24/7 for Fire Restoration?",
+                description:
+                  "From emergency board-up to final reconstruction, our certified team handles every stage of fire and smoke recovery so you can focus on getting back to normal.",
+                bullets: [
+                  "24/7 Emergency Response: Immediate response to secure your property and stop further damage",
+                  "IICRC Certified: Fire restoration specialists trained in smoke and soot remediation",
+                  "Complete Recovery: From board-up through final reconstruction, we manage the full process",
+                ],
+              },
+              {
+                heading: "Our Fire Restoration Services",
+                description:
+                  "We deliver full-service fire and smoke recovery tailored to residential and commercial properties.",
+                bullets: [
+                  "Emergency board-up & securing",
+                  "Fire damage assessment",
+                  "Smoke & soot removal",
+                  "Structural cleaning & deodorization",
+                  "Content cleaning & restoration",
+                  "Reconstruction & repairs",
+                ],
+              },
+            ]}
           />
 
           <ServiceAreasSection
@@ -166,19 +148,6 @@ export default async function FireRestorationPage() {
               theme={landingPageData.themeData}
             />
           )}
-
-          <BusinessOverviewSection
-            content={landingPageData.content.businessOverview?.content}
-            contact={
-              landingPageData.content.contact || {
-                title: "Contact Us",
-                description: "Get in touch with us today",
-                showMap: true,
-              }
-            }
-            businessData={landingPageData.businessData}
-            theme={landingPageData.themeData}
-          />
 
           <FooterSection
             businessName={landingPageData.businessName}

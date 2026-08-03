@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
-import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
-import ServicePageBanner from "@/sections/ServicePageBanner";
-import ServicePageDetail from "@/sections/ServicePageDetail";
+import ServiceDetailLayout from "@/sections/ServiceDetailLayout";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
@@ -82,51 +80,6 @@ export default async function MoldRemediationPage() {
     }
   ];
 
-  const detailBlocks = [
-    {
-      heading: "Our Mold Remediation Services",
-      description:
-        "Certified mold testing, safe removal, and air quality improvement to protect your health and restore your property.",
-      bullets: [
-        "Mold inspection & testing",
-        "Black mold removal",
-        "Air quality testing",
-        "Containment & HEPA filtration",
-        "Safe mold removal & cleaning",
-        "Moisture control & prevention",
-      ],
-      imageSrc: "/images/image-44.webp",
-      imageAlt: "Professional mold remediation and inspection",
-    },
-    {
-      heading: "Common Signs of Mold",
-      description:
-        "Catch mold early. If you notice any of these warning signs, our team can inspect and remediate before the problem spreads.",
-      bullets: [
-        "Visible mold growth",
-        "Musty odors",
-        "Water stains on walls/ceilings",
-        "Peeling paint or wallpaper",
-        "Allergic symptoms indoors",
-        "Recent water damage",
-      ],
-      imageSrc: "/images/image-46.jpg",
-      imageAlt: "Mold damage inspection and remediation",
-    },
-    {
-      heading: "Why Choose Our Mold Remediation?",
-      description:
-        "IICRC-certified specialists use containment protocols and moisture control so mold is removed safely — and stays gone.",
-      bullets: [
-        "IICRC certified mold remediation experts",
-        "HEPA filtration and containment to prevent cross-contamination",
-        "Moisture control and prevention strategies to stop mold from returning",
-      ],
-      imageSrc: "/images/image-48.jpg",
-      imageAlt: "Safe mold removal and air quality restoration",
-    },
-  ];
-
   return (
     <Layout
       title={landingPageData.seoData.title}
@@ -147,18 +100,52 @@ export default async function MoldRemediationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <ServicePageBanner
-            title="Mold Remediation Services"
-            description="Certified mold testing, safe removal, air quality improvement, and prevention solutions for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
-            imageSrc="/images/image-49.jpg"
-            imageAlt="Mold remediation services"
+          <ServiceDetailLayout
+            title="Allied 24/7 Restoration — Your Trusted Partner in Mold Remediation"
+            intro="Our professional mold remediation services protect your health and property from harmful mold growth. We provide certified mold testing, safe removal, air quality improvement, and prevention solutions for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
             breadcrumbLabel="Mold Remediation"
+            heroImage="/images/image-49.jpg"
+            heroAlt="Mold remediation services"
+            defaultService="Mold Remediation"
             theme={landingPageData.themeData}
-          />
-
-          <ServicePageDetail
-            theme={landingPageData.themeData}
-            blocks={detailBlocks}
+            sections={[
+              {
+                heading: "Why Choose Allied 24/7 for Mold Remediation?",
+                description:
+                  "IICRC-certified specialists use containment protocols and moisture control so mold is removed safely — and stays gone.",
+                bullets: [
+                  "Expertise and Experience: IICRC certified mold remediation experts with advanced training",
+                  "Safe & Thorough: HEPA filtration and containment protocols prevent cross-contamination",
+                  "Prevention Focus: Moisture control solutions to stop mold from returning",
+                ],
+              },
+              {
+                heading: "Our Mold Remediation Services",
+                description:
+                  "Certified testing, safe removal, and air quality improvement for residential and commercial properties.",
+                bullets: [
+                  "Mold inspection & testing",
+                  "Black mold removal",
+                  "Air quality testing",
+                  "Containment & HEPA filtration",
+                  "Safe mold removal & cleaning",
+                  "Moisture control & prevention",
+                ],
+              },
+              {
+                heading: "Common Signs of Mold",
+                description:
+                  "Catch mold early. If you notice any of these warning signs, our team can inspect and remediate before the problem spreads.",
+                bullets: [
+                  "Visible mold growth",
+                  "Musty odors",
+                  "Water stains on walls/ceilings",
+                  "Peeling paint or wallpaper",
+                  "Allergic symptoms indoors",
+                  "Recent water damage",
+                ],
+              },
+            ]}
           />
 
           <ServiceAreasSection
@@ -174,19 +161,6 @@ export default async function MoldRemediationPage() {
               theme={landingPageData.themeData}
             />
           )}
-
-          <BusinessOverviewSection
-            content={landingPageData.content.businessOverview?.content}
-            contact={
-              landingPageData.content.contact || {
-                title: "Contact Us",
-                description: "Get in touch with us today",
-                showMap: true,
-              }
-            }
-            businessData={landingPageData.businessData}
-            theme={landingPageData.themeData}
-          />
 
           <FooterSection
             businessName={landingPageData.businessName}

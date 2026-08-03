@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
-import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
-import ServicePageBanner from "@/sections/ServicePageBanner";
-import ServicePageDetail from "@/sections/ServicePageDetail";
+import ServiceDetailLayout from "@/sections/ServiceDetailLayout";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
@@ -82,51 +80,6 @@ export default async function RadonMitigationPage() {
     }
   ];
 
-  const detailBlocks = [
-    {
-      heading: "Radon Testing Services",
-      description:
-        "Accurate testing options for every situation — from short-term screens to continuous monitoring and real estate transactions.",
-      bullets: [
-        "Short-term testing (2-7 days)",
-        "Long-term testing (90+ days)",
-        "Continuous monitoring systems",
-        "Professional analysis & reporting",
-        "Real estate transaction testing",
-        "Post-mitigation verification",
-      ],
-      imageSrc: "/images/image-12.jpg",
-      imageAlt: "Professional radon testing equipment",
-    },
-    {
-      heading: "Radon Mitigation Systems",
-      description:
-        "Custom mitigation systems designed for your property to reduce radon to safe levels and keep your indoor air healthy.",
-      bullets: [
-        "Sub-slab depressurization",
-        "Drain-tile suction systems",
-        "Sump hole suction",
-        "Active soil depressurization",
-        "Crawl space ventilation",
-        "System maintenance & monitoring",
-      ],
-      imageSrc: "/images/image-14.jpg",
-      imageAlt: "Radon mitigation system installation",
-    },
-    {
-      heading: "Why Test for Radon?",
-      description:
-        "Radon is colorless and odorless — and the second leading cause of lung cancer after smoking. Testing protects your family.",
-      bullets: [
-        "EPA recommends all homes be tested for radon",
-        "Protects your family from a known lung cancer risk",
-        "Professional results with clear next steps if mitigation is needed",
-      ],
-      imageSrc: "/images/image-15.jpg",
-      imageAlt: "Radon mitigation and indoor air safety",
-    },
-  ];
-
   return (
     <Layout
       title={landingPageData.seoData.title}
@@ -147,18 +100,52 @@ export default async function RadonMitigationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <ServicePageBanner
-            title="Radon Testing & Mitigation Services"
-            description="Protect your family from radon gas with certified testing, custom mitigation systems, and post-installation verification across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
-            imageSrc="/images/image-11.webp"
-            imageAlt="Radon testing and mitigation services"
+          <ServiceDetailLayout
+            title="Allied 24/7 Restoration — Your Trusted Partner in Radon Testing & Mitigation"
+            intro="Protect your family from the dangers of radon gas with our professional testing and mitigation services. Radon is a colorless, odorless gas that can cause lung cancer. We provide certified testing, custom mitigation systems, and post-installation verification for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
             breadcrumbLabel="Radon Mitigation"
+            heroImage="/images/image-11.webp"
+            heroAlt="Radon testing and mitigation services"
+            defaultService="Radon Mitigation"
             theme={landingPageData.themeData}
-          />
-
-          <ServicePageDetail
-            theme={landingPageData.themeData}
-            blocks={detailBlocks}
+            sections={[
+              {
+                heading: "Why Test for Radon?",
+                description:
+                  "Radon is colorless and odorless — and the second leading cause of lung cancer after smoking. Testing protects your family.",
+                bullets: [
+                  "EPA Recommended: The EPA recommends all homes be tested for radon",
+                  "Health Protection: Testing protects your family from a known lung cancer risk",
+                  "Peace of Mind: Professional results with clear next steps if mitigation is needed",
+                ],
+              },
+              {
+                heading: "Radon Testing Services",
+                description:
+                  "Accurate testing options for every situation — from short-term screens to continuous monitoring.",
+                bullets: [
+                  "Short-term testing (2-7 days)",
+                  "Long-term testing (90+ days)",
+                  "Continuous monitoring systems",
+                  "Professional analysis & reporting",
+                  "Real estate transaction testing",
+                  "Post-mitigation verification",
+                ],
+              },
+              {
+                heading: "Radon Mitigation Systems",
+                description:
+                  "Custom mitigation systems designed for your property to reduce radon to safe levels.",
+                bullets: [
+                  "Sub-slab depressurization",
+                  "Drain-tile suction systems",
+                  "Sump hole suction",
+                  "Active soil depressurization",
+                  "Crawl space ventilation",
+                  "System maintenance & monitoring",
+                ],
+              },
+            ]}
           />
 
           <ServiceAreasSection
@@ -174,19 +161,6 @@ export default async function RadonMitigationPage() {
               theme={landingPageData.themeData}
             />
           )}
-
-          <BusinessOverviewSection
-            content={landingPageData.content.businessOverview?.content}
-            contact={
-              landingPageData.content.contact || {
-                title: "Contact Us",
-                description: "Get in touch with us today",
-                showMap: true,
-              }
-            }
-            businessData={landingPageData.businessData}
-            theme={landingPageData.themeData}
-          />
 
           <FooterSection
             businessName={landingPageData.businessName}
