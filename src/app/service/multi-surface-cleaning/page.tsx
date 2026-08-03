@@ -3,10 +3,12 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
+import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
+import ServicePageBanner from "@/sections/ServicePageBanner";
+import ServicePageDetail from "@/sections/ServicePageDetail";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
-import Breadcrumbs from "@/app/service/[id]/components/Breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,33 +54,77 @@ async function getLandingPageData(): Promise<LandingPageData> {
 export default async function MultiSurfaceCleaningPage() {
   const landingPageData = await getLandingPageData();
 
-  // Multi-surface cleaning service areas for Montana
   const serviceAreas = [
     {
       city: "bigfork",
       region: "MT",
-      description: "Professional multi-surface cleaning for Bigfork homes and businesses including carpet, tile, and hardwood floor restoration"
+      description: "Professional multi-surface cleaning for Bigfork homes and businesses"
     },
     {
-      city: "columbia-falls", 
+      city: "columbia-falls",
       region: "MT",
-      description: "Complete residential and commercial cleaning services throughout Columbia Falls with eco-friendly products"
+      description: "Eco-friendly carpet, tile, and upholstery cleaning throughout Columbia Falls"
     },
     {
-      city: "kalispell", 
+      city: "kalispell",
       region: "MT",
-      description: "Expert carpet cleaning, upholstery restoration, and tile & grout cleaning for Kalispell properties"
+      description: "Complete residential and commercial surface cleaning for Kalispell properties"
     },
     {
-      city: "whitefish", 
+      city: "whitefish",
       region: "MT",
-      description: "Premium multi-surface cleaning with specialized hardwood floor care and pressure washing for Whitefish homes"
+      description: "Premium multi-surface cleaning and floor restoration for Whitefish homes and businesses"
     },
     {
-      city: "lakeside", 
+      city: "lakeside",
       region: "MT",
-      description: "Comprehensive cleaning services including drapery cleaning, rug restoration, and post-construction cleanup for Lakeside"
+      description: "Thorough cleaning services for Lakeside residential and commercial spaces"
     }
+  ];
+
+  const detailBlocks = [
+    {
+      heading: "Our Cleaning Services",
+      description:
+        "Eco-friendly products and advanced techniques for carpets, tile, hardwood, upholstery, and more.",
+      bullets: [
+        "Carpet & rug cleaning",
+        "Tile & grout cleaning",
+        "Hardwood floor restoration",
+        "Upholstery & drapery cleaning",
+        "Pressure washing",
+        "Post-construction cleanup",
+      ],
+      imageSrc: "/images/image-2.jpg",
+      imageAlt: "Professional multi-surface cleaning services",
+    },
+    {
+      heading: "Residential & Commercial",
+      description:
+        "Flexible cleaning plans for homes, offices, medical facilities, and industrial spaces.",
+      bullets: [
+        "Home & apartment cleaning",
+        "Office & retail spaces",
+        "Medical facility cleaning",
+        "Industrial cleaning",
+        "Window cleaning",
+        "Move-in/move-out cleaning",
+      ],
+      imageSrc: "/images/image-4.jpg",
+      imageAlt: "Residential and commercial cleaning",
+    },
+    {
+      heading: "Why Choose Our Cleaning Services?",
+      description:
+        "Safe products, proven methods, and a satisfaction guarantee — with scheduling that fits your life.",
+      bullets: [
+        "Eco-friendly products safe for families and pets",
+        "Advanced equipment and proven deep-cleaning methods",
+        "100% satisfaction guarantee with flexible scheduling",
+      ],
+      imageSrc: "/images/image-6.jpg",
+      imageAlt: "Professional surface cleaning results",
+    },
   ];
 
   return (
@@ -101,66 +147,19 @@ export default async function MultiSurfaceCleaningPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <section className="mx-auto w-full md:max-w-[70vw] px-4 sm:px-6 py-12 md:py-16">
-            <Breadcrumbs 
-              titleText="Multi-Surface Cleaning"
-              theme={landingPageData.themeData}
-            />
-            
-            <div className="mt-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Multi-Surface Cleaning Services
-              </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our professional multi-surface cleaning services keep your residential and commercial properties looking their best. 
-                We use eco-friendly products and advanced techniques to clean carpets, tile, hardwood, upholstery, and more 
-                for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside.
-              </p>
+          <ServicePageBanner
+            title="Multi-Surface Cleaning Services"
+            description="Professional cleaning for carpets, tile, hardwood, upholstery, and more — eco-friendly products and advanced techniques for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
+            imageSrc="/images/image-1.jpg"
+            imageAlt="Multi-surface cleaning services"
+            breadcrumbLabel="Multi-Surface Cleaning"
+            theme={landingPageData.themeData}
+          />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Cleaning Services</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Carpet & rug cleaning</li>
-                    <li>• Tile & grout cleaning</li>
-                    <li>• Hardwood floor restoration</li>
-                    <li>• Upholstery & drapery cleaning</li>
-                    <li>• Pressure washing</li>
-                    <li>• Post-construction cleanup</li>
-                  </ul>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Residential & Commercial</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Home & apartment cleaning</li>
-                    <li>• Office & retail spaces</li>
-                    <li>• Medical facility cleaning</li>
-                    <li>• Industrial cleaning</li>
-                    <li>• Window cleaning</li>
-                    <li>• Move-in/move-out cleaning</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-green-50 border border-green-200 p-6 rounded-lg mb-12">
-                <h3 className="text-xl font-semibold text-green-900 mb-4">Why Choose Our Cleaning Services?</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Eco-Friendly Products</h4>
-                    <p className="text-green-700 text-sm">Environmentally safe cleaning products that are tough on dirt but gentle on surfaces and safe for families and pets</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Advanced Techniques</h4>
-                    <p className="text-green-700 text-sm">State-of-the-art equipment and proven methods for deep cleaning all types of surfaces</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Satisfaction Guaranteed</h4>
-                    <p className="text-green-700 text-sm">100% satisfaction guarantee with flexible scheduling and customized cleaning plans</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <ServicePageDetail
+            theme={landingPageData.themeData}
+            blocks={detailBlocks}
+          />
 
           <ServiceAreasSection
             serviceAreas={serviceAreas}
@@ -175,6 +174,19 @@ export default async function MultiSurfaceCleaningPage() {
               theme={landingPageData.themeData}
             />
           )}
+
+          <BusinessOverviewSection
+            content={landingPageData.content.businessOverview?.content}
+            contact={
+              landingPageData.content.contact || {
+                title: "Contact Us",
+                description: "Get in touch with us today",
+                showMap: true,
+              }
+            }
+            businessData={landingPageData.businessData}
+            theme={landingPageData.themeData}
+          />
 
           <FooterSection
             businessName={landingPageData.businessName}

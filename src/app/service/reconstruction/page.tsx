@@ -3,10 +3,12 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
+import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
+import ServicePageBanner from "@/sections/ServicePageBanner";
+import ServicePageDetail from "@/sections/ServicePageDetail";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
-import Breadcrumbs from "@/app/service/[id]/components/Breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,7 +54,6 @@ async function getLandingPageData(): Promise<LandingPageData> {
 export default async function ReconstructionPage() {
   const landingPageData = await getLandingPageData();
 
-  // Reconstruction service areas for Montana
   const serviceAreas = [
     {
       city: "bigfork",
@@ -60,25 +61,70 @@ export default async function ReconstructionPage() {
       description: "Complete property reconstruction and structural rebuilding services for Bigfork homes damaged by fire, water, or storms"
     },
     {
-      city: "columbia-falls", 
+      city: "columbia-falls",
       region: "MT",
-      description: "Professional building restoration including framing, drywall, flooring, and full structural repairs throughout Columbia Falls"
+      description: "Professional rebuilding and remodeling after disaster damage throughout Columbia Falls"
     },
     {
-      city: "kalispell", 
+      city: "kalispell",
       region: "MT",
       description: "Expert home reconstruction with modern building techniques and quality materials for Kalispell residential properties"
     },
     {
-      city: "whitefish", 
+      city: "whitefish",
       region: "MT",
       description: "Custom remodeling and reconstruction services restoring Whitefish properties to better-than-before condition"
     },
     {
-      city: "lakeside", 
+      city: "lakeside",
       region: "MT",
-      description: "Comprehensive property rebuilding from foundation to finish work for Lakeside homes affected by disasters"
+      description: "Full-service property reconstruction and repairs for Lakeside homes and businesses"
     }
+  ];
+
+  const detailBlocks = [
+    {
+      heading: "Reconstruction Services",
+      description:
+        "Complete structural repairs and rebuilding after fire, water, storm, or other disaster damage — done right the first time.",
+      bullets: [
+        "Structural repairs & framing",
+        "Drywall installation & finishing",
+        "Flooring restoration",
+        "Roofing & exterior repairs",
+        "Plumbing & electrical",
+        "HVAC system restoration",
+      ],
+      imageSrc: "/images/image-8.jpg",
+      imageAlt: "Property reconstruction and structural repairs",
+    },
+    {
+      heading: "Remodeling & Improvements",
+      description:
+        "Beyond repairs — rebuild with upgrades that improve comfort, value, and long-term durability.",
+      bullets: [
+        "Kitchen reconstruction",
+        "Bathroom restoration",
+        "Basement finishing",
+        "Room additions",
+        "Exterior renovations",
+        "Custom carpentry",
+      ],
+      imageSrc: "/images/image-50.webp",
+      imageAlt: "Home remodeling and reconstruction project",
+    },
+    {
+      heading: "Why Choose Our Reconstruction Services?",
+      description:
+        "Licensed trades, premium materials, and full project management from permits through final inspection.",
+      bullets: [
+        "Licensed builders, electricians, and plumbers for code-compliant work",
+        "Premium materials and modern building techniques",
+        "Complete oversight from permits to final inspection",
+      ],
+      imageSrc: "/images/image-52.jpg",
+      imageAlt: "Allied Restoration reconstruction crew",
+    },
   ];
 
   return (
@@ -101,66 +147,19 @@ export default async function ReconstructionPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <section className="mx-auto w-full md:max-w-[70vw] px-4 sm:px-6 py-12 md:py-16">
-            <Breadcrumbs 
-              titleText="Reconstruction"
-              theme={landingPageData.themeData}
-            />
-            
-            <div className="mt-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Property Reconstruction Services
-              </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our professional reconstruction services help rebuild and restore your property after damage from fire, water, storms, or other disasters. 
-                We provide complete structural repairs, remodeling, and rebuilding services 
-                for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside.
-              </p>
+          <ServicePageBanner
+            title="Property Reconstruction Services"
+            description="Rebuild and restore your property after fire, water, storm, or other disaster damage — complete structural repairs, remodeling, and rebuilding across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
+            imageSrc="/images/image-7.jpg"
+            imageAlt="Property reconstruction services"
+            breadcrumbLabel="Reconstruction"
+            theme={landingPageData.themeData}
+          />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Reconstruction Services</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Structural repairs & framing</li>
-                    <li>• Drywall installation & finishing</li>
-                    <li>• Flooring restoration</li>
-                    <li>• Roofing & exterior repairs</li>
-                    <li>• Plumbing & electrical</li>
-                    <li>• HVAC system restoration</li>
-                  </ul>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Remodeling & Improvements</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Kitchen reconstruction</li>
-                    <li>• Bathroom restoration</li>
-                    <li>• Basement finishing</li>
-                    <li>• Room additions</li>
-                    <li>• Exterior renovations</li>
-                    <li>• Custom carpentry</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-orange-50 border border-orange-200 p-6 rounded-lg mb-12">
-                <h3 className="text-xl font-semibold text-orange-900 mb-4">Why Choose Our Reconstruction Services?</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-orange-800 mb-2">Licensed Contractors</h4>
-                    <p className="text-orange-700 text-sm">Our team includes licensed builders, electricians, and plumbers ensuring code-compliant reconstruction</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-orange-800 mb-2">Quality Materials</h4>
-                    <p className="text-orange-700 text-sm">We use premium materials and modern building techniques for lasting results</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-orange-800 mb-2">Project Management</h4>
-                    <p className="text-orange-700 text-sm">Complete oversight from permits to final inspection, keeping your project on time and budget</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <ServicePageDetail
+            theme={landingPageData.themeData}
+            blocks={detailBlocks}
+          />
 
           <ServiceAreasSection
             serviceAreas={serviceAreas}
@@ -175,6 +174,19 @@ export default async function ReconstructionPage() {
               theme={landingPageData.themeData}
             />
           )}
+
+          <BusinessOverviewSection
+            content={landingPageData.content.businessOverview?.content}
+            contact={
+              landingPageData.content.contact || {
+                title: "Contact Us",
+                description: "Get in touch with us today",
+                showMap: true,
+              }
+            }
+            businessData={landingPageData.businessData}
+            theme={landingPageData.themeData}
+          />
 
           <FooterSection
             businessName={landingPageData.businessName}

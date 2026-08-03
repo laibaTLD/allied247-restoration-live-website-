@@ -65,8 +65,10 @@ export default function FooterSection({
               />
             </div>
             {businessDescription && (
-              <p className="text-sm leading-relaxed opacity-60 max-w-xs font-sans">
-                {businessDescription}
+              <p className="text-sm leading-relaxed opacity-60 max-w-xs font-sans line-clamp-2">
+                {businessDescription.length > 100
+                  ? `${businessDescription.slice(0, 100).trimEnd()}…`
+                  : businessDescription}
               </p>
             )}
           </div>

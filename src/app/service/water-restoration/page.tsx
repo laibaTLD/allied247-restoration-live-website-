@@ -3,10 +3,12 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
+import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
+import ServicePageBanner from "@/sections/ServicePageBanner";
+import ServicePageDetail from "@/sections/ServicePageDetail";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
-import Breadcrumbs from "@/app/service/[id]/components/Breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,7 +54,6 @@ async function getLandingPageData(): Promise<LandingPageData> {
 export default async function WaterRestorationPage() {
   const landingPageData = await getLandingPageData();
 
-  // Water restoration service areas for Montana
   const serviceAreas = [
     {
       city: "bigfork",
@@ -60,25 +61,70 @@ export default async function WaterRestorationPage() {
       description: "24/7 emergency water damage restoration and flood cleanup for Bigfork homes and businesses with fast drying services"
     },
     {
-      city: "columbia-falls", 
+      city: "columbia-falls",
       region: "MT",
       description: "Complete water extraction and structural drying services throughout Columbia Falls for residential and commercial properties"
     },
     {
-      city: "kalispell", 
+      city: "kalispell",
       region: "MT",
       description: "Professional water damage recovery including sewage cleanup and mold prevention for Kalispell properties"
     },
     {
-      city: "whitefish", 
+      city: "whitefish",
       region: "MT",
       description: "Expert water restoration with content cleaning and document recovery services for Whitefish homes and businesses"
     },
     {
-      city: "lakeside", 
+      city: "lakeside",
       region: "MT",
       description: "Comprehensive flood damage restoration with dehumidification and air quality control for Lakeside properties"
     }
+  ];
+
+  const detailBlocks = [
+    {
+      heading: "Our Water Restoration Process",
+      description:
+        "Fast, reliable recovery from floods, leaks, and water-related disasters — from emergency extraction through final repairs.",
+      bullets: [
+        "Emergency contact & inspection",
+        "Water extraction & removal",
+        "Drying & dehumidification",
+        "Cleaning & sanitizing",
+        "Structural repairs",
+        "Content restoration",
+      ],
+      imageSrc: "/images/image-36.jpg",
+      imageAlt: "Water damage extraction and drying equipment",
+    },
+    {
+      heading: "Common Water Damage Causes",
+      description:
+        "We handle every type of water emergency so secondary damage and mold never get a chance to take hold.",
+      bullets: [
+        "Burst or leaking pipes",
+        "Flooding from storms",
+        "Appliance malfunctions",
+        "Roof leaks",
+        "Sewage backups",
+        "Foundation seepage",
+      ],
+      imageSrc: "/images/image-38.jpg",
+      imageAlt: "Flood and water damage restoration in progress",
+    },
+    {
+      heading: "Why Choose Our Water Restoration?",
+      description:
+        "Industrial-grade equipment and round-the-clock response mean your property is dried thoroughly and restored completely.",
+      bullets: [
+        "24/7 emergency response to prevent further damage and mold growth",
+        "Industrial-grade pumps, dehumidifiers, and air movers for fast drying",
+        "Complete restoration from extraction to final repairs",
+      ],
+      imageSrc: "/images/image-39.jpg",
+      imageAlt: "Professional water damage restoration team",
+    },
   ];
 
   return (
@@ -101,66 +147,19 @@ export default async function WaterRestorationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <section className="mx-auto w-full md:max-w-[70vw] px-4 sm:px-6 py-12 md:py-16">
-            <Breadcrumbs 
-              titleText="Water Restoration"
-              theme={landingPageData.themeData}
-            />
-            
-            <div className="mt-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Water Damage Restoration Services
-              </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our professional water damage restoration services provide fast, reliable recovery from floods, leaks, and water-related disasters. 
-                We offer 24/7 emergency response, water extraction, structural drying, and complete restoration 
-                for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside.
-              </p>
+          <ServicePageBanner
+            title="Water Damage Restoration Services"
+            description="24/7 emergency response, water extraction, structural drying, and complete restoration for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
+            imageSrc="/images/image-41.webp"
+            imageAlt="Water damage restoration services"
+            breadcrumbLabel="Water Restoration"
+            theme={landingPageData.themeData}
+          />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Water Restoration Process</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Emergency contact & inspection</li>
-                    <li>• Water extraction & removal</li>
-                    <li>• Drying & dehumidification</li>
-                    <li>• Cleaning & sanitizing</li>
-                    <li>• Structural repairs</li>
-                    <li>• Content restoration</li>
-                  </ul>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Common Water Damage Causes</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Burst or leaking pipes</li>
-                    <li>• Flooding from storms</li>
-                    <li>• Appliance malfunctions</li>
-                    <li>• Roof leaks</li>
-                    <li>• Sewage backups</li>
-                    <li>• Foundation seepage</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg mb-12">
-                <h3 className="text-xl font-semibold text-blue-900 mb-4">Why Choose Our Water Restoration?</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-blue-800 mb-2">24/7 Emergency Response</h4>
-                    <p className="text-blue-700 text-sm">Immediate response to water emergencies to prevent further damage and mold growth</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-blue-800 mb-2">Advanced Equipment</h4>
-                    <p className="text-blue-700 text-sm">Industrial-grade pumps, dehumidifiers, and air movers for fast, effective drying</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-blue-800 mb-2">Complete Restoration</h4>
-                    <p className="text-blue-700 text-sm">From water extraction to final repairs, we handle the entire restoration process</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <ServicePageDetail
+            theme={landingPageData.themeData}
+            blocks={detailBlocks}
+          />
 
           <ServiceAreasSection
             serviceAreas={serviceAreas}
@@ -175,6 +174,19 @@ export default async function WaterRestorationPage() {
               theme={landingPageData.themeData}
             />
           )}
+
+          <BusinessOverviewSection
+            content={landingPageData.content.businessOverview?.content}
+            contact={
+              landingPageData.content.contact || {
+                title: "Contact Us",
+                description: "Get in touch with us today",
+                showMap: true,
+              }
+            }
+            businessData={landingPageData.businessData}
+            theme={landingPageData.themeData}
+          />
 
           <FooterSection
             businessName={landingPageData.businessName}

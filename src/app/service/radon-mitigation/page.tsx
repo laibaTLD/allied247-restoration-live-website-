@@ -3,10 +3,12 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
+import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
+import ServicePageBanner from "@/sections/ServicePageBanner";
+import ServicePageDetail from "@/sections/ServicePageDetail";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
-import Breadcrumbs from "@/app/service/[id]/components/Breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -52,33 +54,77 @@ async function getLandingPageData(): Promise<LandingPageData> {
 export default async function RadonMitigationPage() {
   const landingPageData = await getLandingPageData();
 
-  // Radon testing and mitigation service areas for Montana
   const serviceAreas = [
     {
       city: "bigfork",
       region: "MT",
-      description: "Professional radon testing and mitigation system installation for Bigfork homes to ensure safe indoor air quality"
+      description: "Certified radon testing and custom mitigation systems for Bigfork homes and businesses"
     },
     {
-      city: "columbia-falls", 
+      city: "columbia-falls",
       region: "MT",
-      description: "Complete radon testing services and custom mitigation solutions throughout Columbia Falls for residential properties"
+      description: "Professional radon detection and reduction systems throughout Columbia Falls"
     },
     {
-      city: "kalispell", 
+      city: "kalispell",
       region: "MT",
-      description: "Certified radon testing and mitigation system installation with post-mitigation verification for Kalispell homes"
+      description: "Expert radon testing and mitigation for Kalispell residential and commercial properties"
     },
     {
-      city: "whitefish", 
+      city: "whitefish",
       region: "MT",
-      description: "Expert radon level assessment and professional mitigation system design for Whitefish residential properties"
+      description: "Reliable radon testing and post-mitigation verification for Whitefish properties"
     },
     {
-      city: "lakeside", 
+      city: "lakeside",
       region: "MT",
-      description: "Comprehensive radon testing and mitigation services with continuous monitoring options for Lakeside homes"
+      description: "Complete radon mitigation system installation and monitoring for Lakeside homes"
     }
+  ];
+
+  const detailBlocks = [
+    {
+      heading: "Radon Testing Services",
+      description:
+        "Accurate testing options for every situation — from short-term screens to continuous monitoring and real estate transactions.",
+      bullets: [
+        "Short-term testing (2-7 days)",
+        "Long-term testing (90+ days)",
+        "Continuous monitoring systems",
+        "Professional analysis & reporting",
+        "Real estate transaction testing",
+        "Post-mitigation verification",
+      ],
+      imageSrc: "/images/image-12.jpg",
+      imageAlt: "Professional radon testing equipment",
+    },
+    {
+      heading: "Radon Mitigation Systems",
+      description:
+        "Custom mitigation systems designed for your property to reduce radon to safe levels and keep your indoor air healthy.",
+      bullets: [
+        "Sub-slab depressurization",
+        "Drain-tile suction systems",
+        "Sump hole suction",
+        "Active soil depressurization",
+        "Crawl space ventilation",
+        "System maintenance & monitoring",
+      ],
+      imageSrc: "/images/image-14.jpg",
+      imageAlt: "Radon mitigation system installation",
+    },
+    {
+      heading: "Why Test for Radon?",
+      description:
+        "Radon is colorless and odorless — and the second leading cause of lung cancer after smoking. Testing protects your family.",
+      bullets: [
+        "EPA recommends all homes be tested for radon",
+        "Protects your family from a known lung cancer risk",
+        "Professional results with clear next steps if mitigation is needed",
+      ],
+      imageSrc: "/images/image-15.jpg",
+      imageAlt: "Radon mitigation and indoor air safety",
+    },
   ];
 
   return (
@@ -101,67 +147,19 @@ export default async function RadonMitigationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <section className="mx-auto w-full md:max-w-[70vw] px-4 sm:px-6 py-12 md:py-16">
-            <Breadcrumbs 
-              titleText="Radon Mitigation"
-              theme={landingPageData.themeData}
-            />
-            
-            <div className="mt-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Radon Testing & Mitigation Services
-              </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Protect your family from the dangers of radon gas with our professional testing and mitigation services. 
-                Radon is a colorless, odorless gas that can cause lung cancer. We provide certified testing, 
-                custom mitigation systems, and post-installation verification for homes and businesses 
-                across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside.
-              </p>
+          <ServicePageBanner
+            title="Radon Testing & Mitigation Services"
+            description="Protect your family from radon gas with certified testing, custom mitigation systems, and post-installation verification across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
+            imageSrc="/images/image-11.webp"
+            imageAlt="Radon testing and mitigation services"
+            breadcrumbLabel="Radon Mitigation"
+            theme={landingPageData.themeData}
+          />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Radon Testing Services</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Short-term testing (2-7 days)</li>
-                    <li>• Long-term testing (90+ days)</li>
-                    <li>• Continuous monitoring systems</li>
-                    <li>• Professional analysis & reporting</li>
-                    <li>• Real estate transaction testing</li>
-                    <li>• Post-mitigation verification</li>
-                  </ul>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Radon Mitigation Systems</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Sub-slab depressurization</li>
-                    <li>• Drain-tile suction systems</li>
-                    <li>• Sump hole suction</li>
-                    <li>• Active soil depressurization</li>
-                    <li>• Crawl space ventilation</li>
-                    <li>• System maintenance & monitoring</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg mb-12">
-                <h3 className="text-xl font-semibold text-blue-900 mb-4">Why Test for Radon?</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-blue-800 mb-2">EPA Recommended</h4>
-                    <p className="text-blue-700 text-sm">The EPA recommends all homes be tested for radon, regardless of geographic location or home type</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-blue-800 mb-2">Health Protection</h4>
-                    <p className="text-blue-700 text-sm">Radon is the second leading cause of lung cancer after smoking - testing protects your family</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-blue-800 mb-2">Peace of Mind</h4>
-                    <p className="text-blue-700 text-sm">Professional testing gives you accurate results and guidance on next steps if mitigation is needed</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <ServicePageDetail
+            theme={landingPageData.themeData}
+            blocks={detailBlocks}
+          />
 
           <ServiceAreasSection
             serviceAreas={serviceAreas}
@@ -176,6 +174,19 @@ export default async function RadonMitigationPage() {
               theme={landingPageData.themeData}
             />
           )}
+
+          <BusinessOverviewSection
+            content={landingPageData.content.businessOverview?.content}
+            contact={
+              landingPageData.content.contact || {
+                title: "Contact Us",
+                description: "Get in touch with us today",
+                showMap: true,
+              }
+            }
+            businessData={landingPageData.businessData}
+            theme={landingPageData.themeData}
+          />
 
           <FooterSection
             businessName={landingPageData.businessName}

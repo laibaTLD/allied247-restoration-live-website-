@@ -3,24 +3,26 @@ import Navbar from "@/components/Navbar";
 import FooterSection from "@/sections/FooterSection";
 import ServiceAreasSection from "@/sections/ServiceAreasSection";
 import FAQSection from "@/sections/FAQSection";
+import BusinessOverviewSection from "@/sections/BusinessOverviewSection";
+import ServicePageBanner from "@/sections/ServicePageBanner";
+import ServicePageDetail from "@/sections/ServicePageDetail";
 import { fetchLandingPageForSSG } from "@/lib/database";
 import { LandingPageData } from "@/types/template";
 import { notFound } from "next/navigation";
-import Breadcrumbs from "@/app/service/[id]/components/Breadcrumbs";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Hire Now Our Skilled & Affordable Mold Remediation Contractor | Allied 24/7 Restoration',
-  description: 'Our experienced & certified mold remediation services protect your health and property from harmful mold growth. Call now for expert services. Allied 24/7 Restoration is ready 24/7!',
+  title: 'Professional Mold Remediation Services in Kalispell, MT | Allied 24/7 Restoration',
+  description: 'Professional mold remediation services protect your health and property. Certified mold testing, safe removal, and prevention for homes and businesses in Kalispell and surrounding areas.',
   openGraph: {
-    title: 'Mold Remediation Services | Professional Mold Removal & Testing',
-    description: 'Expert mold remediation and removal services for homes and businesses. Certified mold testing, safe removal, and prevention solutions.',
+    title: 'Mold Remediation Services | Safe Mold Removal & Prevention',
+    description: 'Expert mold inspection, testing, and safe removal with prevention solutions for homes and businesses.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mold Remediation Services | Professional Mold Removal & Testing',
-    description: 'Expert mold remediation and removal services for homes and businesses. Certified mold testing and safe removal.',
+    title: 'Mold Remediation Services | Safe Mold Removal & Prevention',
+    description: 'Expert mold inspection, testing, and safe removal with prevention solutions.',
   },
 };
 
@@ -52,33 +54,77 @@ async function getLandingPageData(): Promise<LandingPageData> {
 export default async function MoldRemediationPage() {
   const landingPageData = await getLandingPageData();
 
-  // Mold remediation service areas for Montana
   const serviceAreas = [
     {
       city: "bigfork",
       region: "MT",
-      description: "Professional mold testing and remediation services for Bigfork homes and businesses, ensuring safe indoor air quality"
+      description: "Professional mold inspection, testing, and safe removal for Bigfork homes and businesses"
     },
     {
-      city: "columbia-falls", 
+      city: "columbia-falls",
       region: "MT",
-      description: "Complete mold removal and prevention services including air quality testing and moisture control throughout Columbia Falls"
+      description: "Complete mold remediation including black mold removal and air quality improvement throughout Columbia Falls"
     },
     {
-      city: "kalispell", 
+      city: "kalispell",
       region: "MT",
-      description: "Certified mold remediation and black mold removal services for Kalispell residential and commercial properties"
+      description: "Certified mold remediation and moisture control solutions for Kalispell residential and commercial properties"
     },
     {
-      city: "whitefish", 
+      city: "whitefish",
       region: "MT",
-      description: "Expert mold inspection and remediation with HEPA filtration and safe removal techniques for Whitefish properties"
+      description: "Expert mold testing and remediation with HEPA filtration for Whitefish properties"
     },
     {
-      city: "lakeside", 
+      city: "lakeside",
       region: "MT",
-      description: "Comprehensive mold remediation with prevention strategies and post-remediation testing for Lakeside homes"
+      description: "Thorough mold removal and prevention strategies for Lakeside homes and businesses"
     }
+  ];
+
+  const detailBlocks = [
+    {
+      heading: "Our Mold Remediation Services",
+      description:
+        "Certified mold testing, safe removal, and air quality improvement to protect your health and restore your property.",
+      bullets: [
+        "Mold inspection & testing",
+        "Black mold removal",
+        "Air quality testing",
+        "Containment & HEPA filtration",
+        "Safe mold removal & cleaning",
+        "Moisture control & prevention",
+      ],
+      imageSrc: "/images/image-44.webp",
+      imageAlt: "Professional mold remediation and inspection",
+    },
+    {
+      heading: "Common Signs of Mold",
+      description:
+        "Catch mold early. If you notice any of these warning signs, our team can inspect and remediate before the problem spreads.",
+      bullets: [
+        "Visible mold growth",
+        "Musty odors",
+        "Water stains on walls/ceilings",
+        "Peeling paint or wallpaper",
+        "Allergic symptoms indoors",
+        "Recent water damage",
+      ],
+      imageSrc: "/images/image-46.jpg",
+      imageAlt: "Mold damage inspection and remediation",
+    },
+    {
+      heading: "Why Choose Our Mold Remediation?",
+      description:
+        "IICRC-certified specialists use containment protocols and moisture control so mold is removed safely — and stays gone.",
+      bullets: [
+        "IICRC certified mold remediation experts",
+        "HEPA filtration and containment to prevent cross-contamination",
+        "Moisture control and prevention strategies to stop mold from returning",
+      ],
+      imageSrc: "/images/image-48.jpg",
+      imageAlt: "Safe mold removal and air quality restoration",
+    },
   ];
 
   return (
@@ -101,66 +147,19 @@ export default async function MoldRemediationPage() {
           serviceAreas={serviceAreas}
         />
         <main className="bg-white">
-          <section className="mx-auto w-full md:max-w-[70vw] px-4 sm:px-6 py-12 md:py-16">
-            <Breadcrumbs 
-              titleText="Mold Remediation"
-              theme={landingPageData.themeData}
-            />
-            
-            <div className="mt-8">
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Mold Remediation Services
-              </h1>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Our professional mold remediation services protect your health and property from harmful mold growth. 
-                We provide certified mold testing, safe removal, air quality improvement, and prevention solutions 
-                for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside.
-              </p>
+          <ServicePageBanner
+            title="Mold Remediation Services"
+            description="Certified mold testing, safe removal, air quality improvement, and prevention solutions for homes and businesses across Bigfork, Columbia Falls, Kalispell, Whitefish, and Lakeside."
+            imageSrc="/images/image-49.jpg"
+            imageAlt="Mold remediation services"
+            breadcrumbLabel="Mold Remediation"
+            theme={landingPageData.themeData}
+          />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Mold Remediation Services</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Mold inspection & testing</li>
-                    <li>• Black mold removal</li>
-                    <li>• Air quality testing</li>
-                    <li>• Containment & HEPA filtration</li>
-                    <li>• Safe mold removal & cleaning</li>
-                    <li>• Moisture control & prevention</li>
-                  </ul>
-                </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Common Signs of Mold</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li>• Visible mold growth</li>
-                    <li>• Musty odors</li>
-                    <li>• Water stains on walls/ceilings</li>
-                    <li>• Peeling paint or wallpaper</li>
-                    <li>• Allergic symptoms indoors</li>
-                    <li>• Recent water damage</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-green-50 border border-green-200 p-6 rounded-lg mb-12">
-                <h3 className="text-xl font-semibold text-green-900 mb-4">Why Choose Our Mold Remediation?</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Certified Specialists</h4>
-                    <p className="text-green-700 text-sm">IICRC certified mold remediation experts with advanced training in safe removal techniques</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Safe & Thorough</h4>
-                    <p className="text-green-700 text-sm">HEPA filtration and containment protocols to prevent cross-contamination during removal</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-green-800 mb-2">Prevention Focus</h4>
-                    <p className="text-green-700 text-sm">Moisture control solutions and prevention strategies to stop mold from returning</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <ServicePageDetail
+            theme={landingPageData.themeData}
+            blocks={detailBlocks}
+          />
 
           <ServiceAreasSection
             serviceAreas={serviceAreas}
@@ -175,6 +174,19 @@ export default async function MoldRemediationPage() {
               theme={landingPageData.themeData}
             />
           )}
+
+          <BusinessOverviewSection
+            content={landingPageData.content.businessOverview?.content}
+            contact={
+              landingPageData.content.contact || {
+                title: "Contact Us",
+                description: "Get in touch with us today",
+                showMap: true,
+              }
+            }
+            businessData={landingPageData.businessData}
+            theme={landingPageData.themeData}
+          />
 
           <FooterSection
             businessName={landingPageData.businessName}
